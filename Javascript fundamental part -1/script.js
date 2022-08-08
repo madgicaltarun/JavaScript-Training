@@ -272,4 +272,75 @@ else {
   console.log("No one win the tropy");
 }
 
+const day = "wednesday";
+
+switch (day) {
+  case "monday": // strict comparison
+    console.log("plan course stucture");
+    console.log("Go to coding meetup");
+    break;
+  case "tuesday":
+    console.log("prepair theory videos");
+    break;
+  case "wednesday":
+  case "thrusday":
+    console.log("write code examples");
+    break;
+  case "friday":
+    console.log("Record videos");
+    break;
+  case "satuday":
+  case "sunday":
+    console.log("Its holiday");
+    break;
+  default:
+    console.log("Not a valid day");
+}
+
+if (day === "monday") {
+  console.log("plan course stucture");
+  console.log("Go to coding meetup");
+} else if (day === "tuesday") {
+  console.log("prepair theory videos");
+} else if (day === "wednesday" || day === "thrusday") {
+  console.log("write code examples");
+} else if (day === "friday") {
+  console.log("Record videos");
+} else if (day === "saturday" || day === "sunday") {
+  console.log("Its holiday");
+} else {
+  console.log("Not a valid day");
+}
+
+const age = 23;
+age >= 18
+  ? console.log("I like to drink wine")
+  : console.log("I like to drink water");
+
+const drink = age > 18 ? "wine" : "water";
+console.log(drink);
+
+let drink2;
+if (age > 18) {
+  drink2 = "wine";
+} else {
+  drink2 = "water";
+}
+
+console.log(`I like to drink ${age > 18 ? "wine" : "water"}`);
+
+
+// challenge 4
+
+let tip;
+const bill = 275;
+
+tip = bill > 50 && bill < 300 ? bill * 0.15 : bill * 0.2;
+
+console.log(
+  `The bill was ${bill}, the tip was ${tip} and the final value is   ${
+    tip + bill
+  }`
+);
+
 */
