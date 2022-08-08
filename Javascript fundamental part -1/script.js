@@ -97,4 +97,179 @@ const markHigherBMI = markBMI > johnBMI;
 
 console.log(markHigherBMI);
 
+
+const firstName = "Tarun";
+
+const job = "programmer";
+
+const birthYear = 1997;
+
+const tarun =
+  "I'm " + firstName + ", a " + (2037 - birthYear) + " year old " + job + "!";
+
+console.log(tarun);
+
+const tarunnew = `I'm ${firstName} , a ${2037 - birthYear} year old ${job} !`;
+
+console.log(`My Name
+is 
+Tarun rai`);    
+const age = 15;
+
+if (age > 18) {
+  console.log("Tarun can start driving license");
+} else {
+  const yearLeft = 18 - age;
+  console.log(`Tarun is too young. Wait another ${yearLeft} years`);
+}
+
+const birthYear = 1991;
+let century;
+if (birthYear <= 2000) {
+  century = 20;
+} else {
+  century = 21;
+}
+//challenge 2
+
+const markWeight = 78;
+const markHeight = 1.69;
+
+const johnW = 92;
+const johnH = 1.95;
+
+const markBMI = markWeight / (markHeight * markHeight);
+
+const johnBMI = johnW / (johnH * johnH);
+
+console.log(markBMI, johnBMI);
+
+const markHigherBMI = markBMI > johnBMI;
+
+if (markHigherBMI) {
+  console.log(`Mark's BMI ${markBMI} is higher than the John's BMI ${johnBMI}`);
+} else {
+    console.log(`John's BMI${johnBMI} is higher than the Mark's BMI ${markBMI}`);
+}
+
+
+//Type conversion
+
+const input = "1991";
+console.log(Number(input));
+console.log(Number(input) + 18);
+
+console.log(Number("tarun"));
+
+console.log(typeof NaN);
+
+console.log(String(23));
+
+
+//type coercion
+
+console.log("I am " + 23 + " year old"); // + operator changes the number automatically becasue of coercion
+
+console.log("23" - "10" - 3); // - operator chnages the string into a number
+
+console.log("23" * "2");
+
+let n = "1" + 1;
+n = n - 1;
+console.log(n);
+
+
+// 5 falsy values : 0, '', undefined , null, NaN
+
+console.log(Boolean(0));
+console.log(Boolean(undefined));
+console.log(Boolean("jonas"));
+console.log(Boolean({}));
+console.log(Boolean(NaN));
+
+const money = 0;
+
+if (money) {
+  console.log("Don't spend it all");
+} else {
+  console.log("You should find a job");
+}
+
+let height;
+
+if (height) {
+  console.log("yay ! height is defined");
+} else {
+  console.log("Height is not defined" );
+}
+
+const age = "18";
+if (age === 18) console.log("You just became an adult (Strict) ");
+
+if (age === 18) console.log("You just became an adult (Loose) ");
+
+const favourite = Number(prompt("What's is your favourite number?"));
+
+console.log(typeof favourite, favourite);
+
+if (favourite === 23) console.log("cool ! 23 is amazing number");
+else if (favourite === 7) console.log(" 7 is also aa cool number");
+else console.log(" number is not 23 or 7");
+
+
+const hasDriversLicense = true;
+const hasGoodVision = true;
+
+console.log(hasDriversLicense && hasGoodVision);
+console.log(hasDriversLicense || hasGoodVision);
+console.log(!hasDriversLicense);
+
+// const shouldDrive = hasDriversLicense && hasGoodVision;
+
+// if (shouldDrive) {
+//   console.log("Tarun is able to drive");
+// } else {
+//   console.log("Someone else shoud drive");
+// }
+
+const isTired = false;
+console.log(hasDriversLicense || hasGoodVision || isTired);
+
+if (hasDriversLicense && hasGoodVision && !isTired) {
+  console.log("Tarun can drive");
+} else {
+  console.log("someone else should drive");
+}
+
+
+
+
+//challenge 3
+
+// const scoreDolphins = (96 + 109 + 89) / 3;
+// const scoreKolas = (88 + 91 + 110) / 3;
+
+// if (scoreDolphins > scoreKolas) console.log("dolphins win the tropy");
+// else if (scoreDolphins === scoreKolas) console.log("Both win the tropy");
+// else console.log("kolas win the tropy");
+
+//Bonus 1
+
+const scoreDolphins = (97 + 112 + 101) / 3;
+const scoreKolas = (109 + 95 + 123) / 3;
+
+if (scoreDolphins > scoreKolas && scoreDolphins >= 100)
+  console.log("dolphins win the tropy");
+else if (
+  scoreDolphins === scoreKolas &&
+  scoreKolas >= 100 &&
+  scoreDolphins >= 100
+)
+  console.log("Both win the tropy");
+else if (scoreKolas > scoreDolphins && scoreKolas >= 100)
+  console.log("kolas win the tropy");
+else {
+  console.log("No one win the tropy");
+}
+
 */
