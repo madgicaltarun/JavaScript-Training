@@ -20,6 +20,16 @@ const restaurant = {
     console.log(starterIndex, time, address, mainIndex);
   },
 
+  orderPizza: function (mainIngredient, ...otherIngredient) {
+    console.log(mainIngredient, otherIngredient);
+  },
+
+  orderPaste: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your declicious pasta with ${ing1} , ${ing2} , ${ing3}`
+    );
+  },
+
   openingHours: {
     thu: {
       open: 12,
@@ -35,6 +45,7 @@ const restaurant = {
     },
   },
 };
+/*
 
 restaurant.orderDelivary({
   time: "22:10",
@@ -72,7 +83,7 @@ const {
 } = restaurant.openingHours;
 
 console.log(o, c);
-/*
+
 
 const arr = [2, 3, 4];
 const a = arr[0];
@@ -114,4 +125,145 @@ const [p = 1, q = 1, r = 1] = [8, 9];
 
 console.log(p, q, r);
 
+const arr = [7, 8, 9];
+const badNewArray = [1, 2, 3, arr[1]];
+console.log(badNewArray);
+
+const newArray = [1, 2, ...arr];
+console.log(...newArray);
+
+const newMenu = [...restaurant.mainMenu, "Cake"];
+console.log(newMenu);
+
+//copy array
+
+const mainMenuCopy = [...restaurant.mainMenu];
+
+// Join Two Array
+
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+// Iterable : arrays, string, map, sets, NOT Objects
+
+const str = "Tarun";
+
+const letters = [...str, "", "s"];
+console.log(letters);
+
+// real world examples
+
+// const ingredients = [
+//   prompt("Let's make pasta! Ingredient 1?"),
+//   prompt("Let's make pasta! Ingredient 2?"),
+//   prompt("Let's make pasta! Ingredient 3?"),
+// ];
+
+// restaurant.orderPaste(...ingredients);
+
+//objects
+
+const newResturant = { ...restaurant, founder: "tarun" };
+console.log(newResturant);
+
+
+//Des
+// Spread because of right side of assign operator
+const arr = [1, 2, ...[3, 4]];
+
+const [a, b, ...others] = [1, 2, 3, 4];
+
+console.log(a, b, others);
+
+const [pizza, , risotto, ...otherFoods] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+
+console.log(pizza, risotto, otherFoods);
+
+// Objects
+
+const { sat, ...othersDay } = restaurant.openingHours;
+
+//functions
+
+const add = function (...numbers) {
+  // console.log(numbers);
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+
+add(2, 3);
+add(5, 3, 7, 3);
+
+const x = [23, 5, 7];
+
+add(...x);
+
+restaurant.orderPizza("mushrooms", "onion", "olive", "spinach");
+// Use any data Type , return any data Type  short circuiting
+
+console.log("-------OR-----");
+
+console.log(3 || "tarun");
+
+console.log("" || "Hiii");
+
+console.log(true || 0);
+
+console.log(undefined || null);
+
+const guest1 = restaurant.numGuests ? restaurant.numGuests : 10;
+
+const guest2 = restaurant.numGuests || 10;
+
+console.log("-------AND------");
+
+console.log(0 && "tarun");
+
+console.log(7 && "Tarun");
+
+//practical Example
+
+if (restaurant.orderPizza) {
+  restaurant.orderPizza("mushroom", "spainach");
+}
+
+restaurant.orderPizza && restaurant.orderPizza("mushroom");
+
+// Nullish values are null and undefined
+
+restaurant.numGuests = 0;
+
+const guests = restaurant.numGuests || 10;
+
+console.log(guests);
+
+const guestCorrect = restaurant.numGuests ?? 10;
 */
+
+const restaurant1 = {
+  name: "capri",
+  numGuests: 20,
+};
+
+const restaurant2 = {
+  name: "La Piazza",
+  owner: "tarun rai",
+};
+
+restaurant1.numGuests = restaurant1.numGuests || 10;
+//  OR assignment Operator
+// restaurant1.numGuests ||= 10;
+// restaurant2.numGuests ||= 10;
+
+// Logical Nullish assigmnent
+
+restaurant1.numGuests ??= 10;
+restaurant2.numGuests ??= 10;
+restaurant1.owner = restaurant1.owner && "<Anonymous>";
+restaurant2.owner = restaurant2.owner && "<Anonymous>";
+restaurant2.numGuests = restaurant2.numGuests || 10;
