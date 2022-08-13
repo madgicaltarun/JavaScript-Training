@@ -47,7 +47,6 @@ const newPassport = function (person) {
 
 newPassport(tarun);
 checkIn(flight, tarun);
-*/
 const oneWord = function (str) {
   return str.replace(/ /g, "").toLowerCase();
 };
@@ -64,3 +63,95 @@ const transformer = function (str, fun) {
   console.log(`transForm By ${fun.name}`);
 };
 transformer("JavaScript is the best", upperFirstWord);
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greetingHey = greet("Hey");
+greetingHey("Tarun");
+
+greet("hello")("rajput");
+
+//challenge
+
+const greet1 = (greeting) => (name) => console.log(`${greeting} ${name}`);
+
+greet1("hIIIII")("Tarun");
+*/
+
+const lufthansa = {
+  airline: "Lufthansa",
+  iataCode: "LH",
+  booking: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.booking.push({ flight: `${this.iataCode} ${flightNum}`, name });
+  },
+};
+
+lufthansa.book(239, "Tarun Rai");
+
+const eurowing = {
+  airline: "Eurowings",
+  iataCode: "EW",
+  booking: [],
+};
+
+const book = lufthansa.book;
+//Does not work
+//book(23, "Paras");
+// Call Method
+book.call(eurowing, 23, "Tarun Rajput");
+console.log(eurowing);
+
+book.call(lufthansa, 22, "Rai Tarun");
+
+// Apply method
+
+const flightData = [583, "George Cooper"];
+
+book.apply(eurowing, flightData);
+
+book.call(lufthansa, ...flightData);
+
+// Bind Method
+
+const bookEW = book.bind(eurowing);
+const bookLH = book.bind(lufthansa);
+
+bookEW(11, "Hii");
+
+// With Event Listeners
+
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+document
+  .querySelector(".buy")
+  .addEventListener("click", lufthansa.buyPlane.bind(lufthansa));
+
+// Partial Application
+
+const addTax = (rate, value) => value + value * rate;
+
+console.log(addTax(10, 200));
+
+const addVAT = addTax.bind(null, 23);
+console.log(addVAT(23));
+
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const addVAT2 = addTaxRate(0.23);
+console.log(addVAT2(100));
