@@ -61,9 +61,11 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = "";
-  movements.forEach(function (mov, i) {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? "deposit" : "withdrawal";
     const html = `
     <div class="movements__row">
@@ -196,6 +198,14 @@ btnClose.addEventListener("click", function (e) {
     containerApp.style.opacity = 0;
   }
   inputCloseUsername.value = inputClosePin.value = "";
+});
+
+let sorted = false;
+
+btnSort.addEventListener("click", function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
@@ -371,7 +381,7 @@ console.log(movements.every((mov) => mov > 0));
 
 const deposit = (mov = mov > 0);
 
-*/
+
 
 // FLat and FlatMap
 
@@ -394,3 +404,97 @@ const overalBalance = accounts
 const overalBalance2 = accounts
   .flatMap((acc) => acc.movements)
   .reduce((acc, curr) => acc + curr, 0);
+
+
+// Sort also mute the array
+const owners = ["Jonus", "Zach", "Adam", "Martha"];
+
+console.log(owners.sort());
+// return <0 , A,B (Keep order)
+// return >0 B,A   (switch Order)
+
+// Ascending Order
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (b > a) return -1;
+// });
+movements.sort((a, b) => a - b);
+
+console.log(movements);
+
+// Descending Order
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (b > a) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
+
+
+const arr = [1, 2, 3, 4, 5, 6, 7];
+const x = new Array(7);
+console.log(x);
+
+x.fill(1, 3, 5);
+console.log(x);
+
+arr.fill(23, 4, 6);
+
+// Array.from,
+
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+
+labelBalance.addEventListener("click", function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll(".movements__value"),
+    (el) => Number(el.textContent)
+  );
+  console.log(movementsUI);
+});
+
+*/
+
+const bankDepositSum = accounts
+  .flatMap((acc) => acc.movements)
+  .filter((mov) => mov > 0)
+  .reduce((acc, curr) => acc + curr, 0);
+
+console.log(bankDepositSum);
+
+// const numdeposits1000 = accounts
+//   .flatMap((acc) => acc.movements)
+//   .filter((mov) => mov > 1000).length;
+
+const numdeposits1000 = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce((count, curr) => (curr > 1000 ? ++count : count), 0);
+
+const sums = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (sum, curr) => {
+      curr > 0 ? (sum.deposits += curr) : (sum.withdrawls += curr);
+      return sum;
+    },
+
+    { deposits: 0, withdrawls: 0 }
+  );
+console.log(sums);
+
+// this is a nice title=> This Is a Nice Title
+
+const convertTitle = function (title) {
+  const expectations = ["a", "an", "the"];
+
+  const title = title
+    .toLowerCase()
+    .split(" ")
+    .map((word) =>
+      expectations.includes(word) ? word : word[0].toUpperCase() + word.slice(1)
+    )
+    .join(" ");
+  return title;
+};

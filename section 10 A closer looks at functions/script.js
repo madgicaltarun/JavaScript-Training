@@ -79,7 +79,7 @@ greet("hello")("rajput");
 const greet1 = (greeting) => (name) => console.log(`${greeting} ${name}`);
 
 greet1("hIIIII")("Tarun");
-*/
+
 
 const lufthansa = {
   airline: "Lufthansa",
@@ -155,3 +155,25 @@ const addTaxRate = function (rate) {
 
 const addVAT2 = addTaxRate(0.23);
 console.log(addVAT2(100));
+
+const runOnce = function () {
+  console.log(" This will never run");
+};
+
+(function () {
+  console.log("It will neveerrrrr again");
+})();
+
+*/
+// closures
+
+const secureBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+booker();
