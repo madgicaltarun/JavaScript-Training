@@ -262,7 +262,9 @@ btnLogin.addEventListener("click", function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = "";
     inputLoginPin.blur();
+    console.log(timer);
     if (timer) clearInterval(timer);
+    console.log(timer);
     timer = startLogOutTimer();
 
     // Update UI
