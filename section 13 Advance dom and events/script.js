@@ -30,6 +30,111 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
+// button Scrolling
+
+const btnScrollTo = document.querySelector(".btn--scroll-to");
+const section1 = document.querySelector("#section--1");
+
+btnScrollTo.addEventListener("click", function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log("Target", e.target.getBoundingClientRect());
+
+  console.log("current Scroll", window.pageXOffset, window.pageYOffset);
+
+  console.log(
+    "height/width",
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+  // window.scrollTo(s1coords.left, s1coords.top + window.pageYOffset);
+  // window.scrollTo({
+  //   left: s1coords.left,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: "smooth",
+  // });
+
+  section1.scrollIntoView({ behavior: "smooth" });
+});
+
+//page navigation
+
+// document.querySelectorAll(".nav__link").forEach(function (el) {
+//   el.addEventListener("click", function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute("href");
+//     document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+//   });
+// });
+
+// Add event listerner to the common parent
+// determine what element originated the event
+
+document.querySelector(".nav__links").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  // Matching Strategy
+  if (e.target.classList.contains("nav__link")) {
+    const id = e.target.getAttribute("href");
+    document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+  }
+});
+
+//tabbed Component
+
+const tabs = document.querySelectorAll(".operation__tab");
+const tabsContainer = document.querySelector(".operations__tab-container");
+const tabContent = document.querySelectorAll(".operations__content");
+
+tabsContainer.addEventListener("click", function () {
+  const clicked = e.target.closet(".operations__tab");
+
+  if (!clicked) return;
+
+  tabs.forEach((t) => t.classList.remove("operations__tab--active"));
+  tabContent.forEach((c) => c.classList.remove("operations__content--active"));
+
+  clicked.classList.add("operations__tab--active");
+
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add("operations__content--active");
+});
+
+// Menu fad Animation
+
+const handleHover = function (e, opacity) {
+  if (e.target.classList.contains("nav__link")) {
+    const link = e.target;
+    const sibilings = link.closest(".nav").querySelectorAll("nav__link");
+    const logo = link.closest(".nav").querySelector("img");
+
+    sibilings.forEach((el) => {
+      console.log("hello");
+      if (el !== link) el.style.opacity = this;
+    });
+
+    logo.style.opacity = this;
+  }
+};
+
+const nav = document.querySelector(".nav");
+nav.addEventListener("mouseover", handleHover.bind(0.5));
+nav.addEventListener("mouseout", handleHover.bind(1));
+
+// Sticky navigation
+const initialCor = section1.getBoundingClientRect();
+window.addEventListener("scroll", function (e) {
+  if (window.scrollY > initialCor.top) {
+    nav.classList.add("sticky");
+  } else {
+    nav.classList.remove("sticky");
+  }
+});
+
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -109,45 +214,106 @@ logo.classList.set("c", "j");
 logo.classList.toggle("c");
 logo.classList.contains("c");
 
+
+
 // don't use
 logo.className = "tarun";
-*/
 
-const btnScrollTo = document.querySelector(".btn--scroll-to");
-const section1 = document.querySelector("#section--1");
+// const alertH1 = function (e) {
+//   alert("addEventListener! Great you are listening heading");
+//   h1.removeEventListener("mouseenter", alertH1);
+// };
+// const h1 = document.querySelector("h1");
+// h1.addEventListener("mouseenter", alertH1);
 
-btnScrollTo.addEventListener("click", function (e) {
-  const s1coords = section1.getBoundingClientRect();
-  console.log(s1coords);
+// h1.onmouseenter = function (e) {
+//   alert("addEventListener! Great you are listening heading");
+// };
 
-  console.log("Target", e.target.getBoundingClientRect());
+//
 
-  console.log("current Scroll", window.pageXOffset, window.pageYOffset);
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 
-  console.log(
-    "height/width",
-    document.documentElement.clientHeight,
-    document.documentElement.clientWidth
-  );
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)} ${randomInt(0, 255)} ${randomInt(0, 255)})`;
 
-  // Scrolling
-  // window.scrollTo(s1coords.left, s1coords.top + window.pageYOffset);
-  // window.scrollTo({
-  //   left: s1coords.left,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior: "smooth",
-  // });
+document.querySelector(".nav").addEventListener(
+  "click",
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log("Nav", e.target, e.currentTarget);
+  },
+  true
+);
 
-  section1.scrollIntoView({ behavior: "smooth" });
+document.querySelector(".nav__link").addEventListener("click", function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log("Link", e.target, e.currentTarget);
+
+  // Stop Propagation
+  // e.stopPropagation();
 });
 
-const alertH1 = function (e) {
-  alert("addEventListener! Great you are listening heading");
-  h1.removeEventListener("mouseenter", alertH1);
-};
-const h1 = document.querySelector("h1");
-h1.addEventListener("mouseenter", alertH1);
+document.querySelector(".nav__links").addEventListener("click", function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log("Container", e.target, e.currentTarget);
+});
 
-h1.onmouseenter = function (e) {
-  alert("addEventListener! Great you are listening heading");
+
+const h1 = document.querySelector("h1");
+
+// Going downwards:child
+
+console.log(h1.querySelectorAll(".highlight"));
+console.log(h1.childNodes);
+console.log(h1.children);
+h1.firstElementChild.style.color = "white";
+h1.lastElementChild.style.color = "orangered";
+
+// Going upward
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+h1.closest(".header").style.backgroundColor = "orangered";
+
+// going sidewise sibiling
+
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+console.log(h1.parentElement.children);
+
+*/
+
+// const obsCallback = function (entries, observer) {
+//   entries.forEach((entry) => console.log(entry));
+// };
+// const obsOptions = {
+//   root: null,
+//   threshold: [0, 0.2],
+// };
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+// observer.observe(section1);
+
+const header = document.querySelector(".header");
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) nav.classList.add("sticky");
+  else {
+    nav.classList.remove("sticky");
+  }
 };
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: "-90px",
+});
+
+headerObserver.observe(header);
