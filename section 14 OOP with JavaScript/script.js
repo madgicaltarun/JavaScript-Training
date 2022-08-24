@@ -288,3 +288,60 @@ jay.introduce();
 jay.calcAge();
 
 */
+class Account {
+  // Public fields
+  locale = navigator.language;
+  _movements = [];
+
+  //Private fields
+  #movements = [];
+  #pin;
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+    // this._movements = [];
+    // this.locale = navigator.language;
+  }
+
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(val) {
+    this.#movements.push(val);
+    return this;
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+  }
+  _approveLoan(val) {
+    return true;
+  }
+  requestLoan(val) {
+    if (this._approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan Approved`);
+      return this;
+    }
+  }
+
+  //Private Methods
+  //   #approveLoan(val) {
+  //     return true;
+  //   }
+}
+
+const acc1 = new Account("Tarun", "EUR", 1111);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+
+console.log(acc1);
+console.log(acc1.pin);
+
+// console.log(acc1.#movements);
+
+// chaining
+acc1.deposit(300).deposit(500).withdraw(34).requestLoan(23333).withdraw(4000);
