@@ -68,19 +68,146 @@ getCountryAndNeighbour("portugal");
 //     });
 // };
 
-const getCountryData = function (country) {
-  fetch(`https://restcountries.com/v2/name/${country}`)
-    .then((response) => response.json())
-    .then((data) => {
-      renderCountry(data[0]);
-      const neighbour = data[0].borders?.[0];
+// const getJSON = function (url, errorMsg = "Some thing went wrong") {
+//   return fetch(url).then((response) => {
+//     if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+//     return response.json();
+//   });
+// };
 
-      if (!neighbour) return;
+// const renderError = function (msg) {
+//   countriesContainer.insertAdjacentText("beforeend", msg);
+//   countriesContainer.style.opacity = 1;
+// };
 
-      fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
-        .then((response) => response.json())
-        .then((data) => renderCountry(data[0], "neighbour"));
-    });
+// const getCountryData = function (country) {
+//   fetch(`https://restcountries.com/v2/name/${country}`)
+//     .then((response) => {
+//       console.log(response);
+
+//       if (!response.ok) throw new Error("Country not found");
+//       returnresponse.json();
+//     })
+//     .then((data) => {
+//       renderCountry(data[0]);
+//       const neighbour = data[0].borders?.[0];
+
+//       if (!neighbour) return;
+
+//       fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
+//         .then((response) => response.json())
+//         .then((data) => renderCountry(data[0], "neighbour"))
+//         .catch((err) => renderError(`Something went wrong ${err.message}`));
+//     });
+// };
+
+// btn.addEventListener("click", function () {
+//   getCountryData("usa");
+// });
+
+// const getCountryData = function (country) {
+//   getJSON(
+//     `https://restcountries.com/v2/name/${country}`,
+//     "country not found"
+//   ).then((data) => {
+//     renderCountry(data[0]);
+//     const neighbour = data[0].borders?.[0];
+
+//     if (!neighbour) throw new Error("No neighbour found");
+
+//     return getJSON(
+//       `https://restcountries.com/v3.1/alpha/${neighbour}`,
+//       "Country not found"
+//     )
+//       .then((data) => renderCountry(data[0], "neighbour"))
+//       .catch((err) => renderError(`Something went wrong ${err.message}`));
+//   });
+// };
+
+// btn.addEventListener("click", function () {
+//   getCountryData("usa");
+// });
+
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   console.log("Lotter draw is happening");
+//   setTimeout(() => {
+//     if (Math.random() >= 0.5) {
+//       resolve("You win ");
+//     } else {
+//       reject("you lost your money");
+//     }
+//   }, 2000);
+// });
+// lotteryPromise.then((res) => console.log(res)).catch((err) => console.log(err));
+
+// const wait = function (seconds) {
+//   return new Promise(function (reslove, reject) {
+//     setTimeout(reslove, seconds * 1000);
+//   });
+// };
+
+// wait(1)
+//   .then(() => {
+//     console.log("1 second passed");
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log("2 second passed");
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log("3 second passed");
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log("4 second passed");
+//   });
+
+// Promise.resolve("abc").then((x) => console.log(x));
+// Promise.reject("abc").then((x) => console.log(x));
+
+// const getPosition = function () {
+//   return new Promise(function (reslove, reject) {
+//     // navigator.geolocation.getCurrentPosition(
+//     //   (position) => resolve(position),
+//     //   (err) => reject(err)
+//     // );
+//     navigator.geolocation.getCurrentPosition(reslove, reject);
+//   });
+// };
+
+// getPosition()
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+const getPosition = function () {
+  return new Promise(function (reslove, reject) {
+    navigator.geolocation.getCurrentPosition(reslove, reject);
+  });
 };
 
-getCountryData("usa");
+const whereAmI = async function (country) {
+  try {
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = -pos.coords;
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}`);
+    if (!resGeo.ok) throw new Error("problem getting location");
+    const dataGeo = await resGeo.json();
+    const res = await fetch(`https://restcountries.com/v2/name/${country}`);
+    const data = await res.json();
+    renderCountry(data[0]);
+  } catch (err) {
+    console.log(err);
+    renderCountry(`Something went wrong `);
+  }
+};
+whereAmI("portugal");
+console.log("First");
+
+try {
+  let y = 1;
+  const x = 2;
+  x = 3;
+} catch (err) {
+  alert(err.message);
+}
