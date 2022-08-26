@@ -5,12 +5,12 @@ console.log("Exporting Module");
 
 console.log("Start Fetching Results");
 
-await fetch("https://jsonplaceholder.typicode.com/users");
+// await fetch("https://jsonplaceholder.typicode.com/users");
 
 console.log("Finishing Fetching");
 
 const shopingCart = 10;
-const cart = [];
+export const cart = [];
 
 export const addToCart = function (product, quantity) {
   cart.push({ product, quantity });

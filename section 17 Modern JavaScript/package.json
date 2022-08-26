@@ -1,0 +1,18 @@
+{
+  "name": "modern",
+  "version": "1.0.0",
+  "main": "clean.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "leaflet": "^1.8.0",
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "parcel": "^2.7.0"
+  },
+  "description": ""
+}
